@@ -36,6 +36,7 @@ def song(client, message):
     for i in message.command[1:]:
         query += ' ' + str(i)
     print(query)
+    await message.reply_chat_action(enums.ChatAction.TYPING)
     m = message.reply("✨ Fetching.")
     ydl_opts = {"format": "bestaudio[ext=m4a]"}
     try:
@@ -66,7 +67,7 @@ def song(client, message):
             info_dict = ydl.extract_info(link, download=False)
             audio_file = ydl.prepare_filename(info_dict)
             ydl.process_info(info_dict)
-        rep = '**𝚂𝚄𝙱𝚂𝙲𝚁𝙸𝙱𝙴 ›› [🍁 ᴄʜᴀɴɴᴇʟ 🍁](https://t.me/cinemala_com1)**\n**𝙿𝙾𝚆𝙴𝚁𝙴𝙳 𝙱𝚈 ›› [muѕíc вσч](https://t.me/CcommusicBot)**\n@𝙲𝙸𝙽𝙴𝙼𝙰𝙻𝙰.𝙲𝙾𝙼**'
+        rep = '<b> <a href=https://t.me/mallu_music_group>Mᴀʟʟᴜ Mᴜsɪᴄ ✨</a> </b>'
         secmul, dur, dur_arr = 1, 0, duration.split(':')
         for i in range(len(dur_arr)-1, -1, -1):
             dur += (int(dur_arr[i]) * secmul)
@@ -74,7 +75,7 @@ def song(client, message):
         message.reply_audio(audio_file, caption=rep, parse_mode=enums.ParseMode.MARKDOWN,quote=False, title=title, duration=dur, performer=performer, thumb=thumb_name)
         m.delete()
     except Exception as e:
-        m.edit("Sorry, an 𝗜𝗡𝗧𝗘𝗥𝗡𝗔𝗟 𝗘𝗥𝗥𝗢𝗥 occurred while downloading your song, please try again later.")
+        m.edit("Sorry, an <b> 𝗜𝗡𝗧𝗘𝗥𝗡𝗔𝗟 𝗘𝗥𝗥𝗢𝗥 </b> occurred while downloading your song, please try again later.")
         print(e)
 
     try:
@@ -100,7 +101,7 @@ async def vsong(client, message: Message):
     urlissed = get_text(message)
 
     pablo = await client.send_message(
-        message.chat.id, f"⏫Downloading."
+        message.chat.id, f"✨"
     )
     if not urlissed:
         await pablo.edit("/video name or ytlink")
