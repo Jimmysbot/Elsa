@@ -36,7 +36,6 @@ def song(client, message):
     for i in message.command[1:]:
         query += ' ' + str(i)
     print(query)
-    await message.reply_chat_action(enums.ChatAction.TYPING)
     m = message.reply("✨ Fetching.")
     ydl_opts = {"format": "bestaudio[ext=m4a]"}
     try:
@@ -57,11 +56,11 @@ def song(client, message):
 
     except Exception as e:
         m.edit(
-            "Sorry, you requested the song in wrong format, please check out the examples.\n/song name or ytlink"
+            "<b> Sorry, you requested the song in wrong format, please check out the examples.\n/song name or ytlink </b>"
         )
         print(str(e))
         return
-    m.edit("⏫ Uploading.")
+    m.edit("<code>⏫ Uploading.</code>")
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             info_dict = ydl.extract_info(link, download=False)
@@ -101,7 +100,7 @@ async def vsong(client, message: Message):
     urlissed = get_text(message)
 
     pablo = await client.send_message(
-        message.chat.id, f"✨"
+        message.chat.id, f"🔗 Your Link Coverting To Video.."
     )
     if not urlissed:
         await pablo.edit("/video name or ytlink")
